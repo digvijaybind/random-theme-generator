@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import "./App.css";
+import ColorPalette from "./components/ColorPalette";
+import {generateColorPalette} from "./utils/colorUtils";
+import {generateRandomTheme} from "./utils/themeUtils";
 
 function App() {
+  const [colors, setColors] = useState(generateColorPalette());
+  const [theme, setTheme] = useState(generateRandomTheme());
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Random Theme Generator</h1>
+      <h2>Color Palette</h2>
+      <ColorPalette colors={colors} />
+      <button onClick={() => setColors(generateColorPalette())}>
+        Generate New Palette
+      </button>
+      <h2>Design Style</h2>
+      <p>{theme}</p>
+      <button onClick={() => setTheme(generateRandomTheme())}>
+        Generate New Design Style
+      </button>
     </div>
   );
 }
